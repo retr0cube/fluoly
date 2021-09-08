@@ -1,7 +1,13 @@
 {
   "name":"Regolith",
   "desc":"Regolith is an Addon Compiler for the Bedrock Edition of Minecraft.",
-  "download_url":"https://github.com/Bedrock-OSS/regolith/releases/download/0.0.2/regolith_0.0.2_Windows_x86.zip",
-  "file_extension":"zip"
-
+  "is_repo_os": "True",
+  "author":"Bedrock_OSS",
+  "gh_api_link":"https://api.github.com/repos/Bedrock-OSS/regolith/releases/latest",
+  "platforms":{
+    "win_86":"regolith_{}_Windows_x86.zip",
+    "win_amd64":"regolith_{}_Windows_x86_64.zip",
+    "win_armv7":"regolith_{}_Windows_armv7.zip",
+    "win_armv6":"regolith_{}_Windows_armv6.zip"
+  }
 }
