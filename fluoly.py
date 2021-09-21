@@ -99,6 +99,7 @@ def show(addon_name):
     """Shows info about an Add-on."""
     
     try:
+        print("\n\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Fetching JSON data...\n")
         wget.download("https://raw.githubusercontent.com/retr0cube/fluoly/master/repo/{}.json".format(addon_name),"{}.json".format(addon_name))
 
         with open('{}.json'.format(addon_name),) as load_json:
