@@ -13,6 +13,9 @@ import wget
 class PackageNotFound(Exception):
     pass
 
+class FetchJsonError(Exception):
+    pass
+
 #___Exit Handling Stuff____#
 
 def exit_handler():
@@ -60,27 +63,35 @@ def install(addon_name, u, o):
         raise PackageNotFound(" Can't find package with name '{}'\n".format(addon_name))
     #__________________________#
 
-
-    print(list(repo_json.keys()))
-    
-    if bool(repo_json["is_on_github"]) == True:
+    if bool(repo_json["is_on_github"]):
 
         latest_package_version = requests.get("https://api.github.com/repos/{}/{}/releases/latest".format(repo_json['author'], addon_name))
-        load_version = latest_package_version.json()["tag_name"]
+        load_version = latest_package_version.json()["name"]
 
     #__________________________#
 
     print("\n\n\033[0;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(repo_json['name']))
-    print("\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Installing Package...\n")
+
 
     #__________________________#
+    supported_platforms_json = repo_json['supported_platforms_download_links']
 
-    if bool(repo_json["is_on_github"]) == True and  os_type == repo_json['supported_platforms'][str(os_type)] and  proc_arch == repo_json['supported_platforms'][str(os_type)]:
-        wget.download(repo_json['supported_platforms'][str(os_type)][str(proc_arch)].format(load_version),"{}_{}.zip".format(addon_name, load_version))
+    if bool(repo_json["is_on_github"]) and os_type in  repo_json["supported_os"] and proc_arch in repo_json["supported_arch"]:
+        print("\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Installing Package...\n") 
+        wget.download(supported_platforms_json[str(os_type)][str(proc_arch)].format(load_version["name"],load_version["name"]),"{}_{}.zip".format(addon_name, load_version["name"]))
 
-    #__________________________#
+    elif not bool(repo_json["is_on_github"]):
+        print("\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Installing Package...\n")
+        wget.download(repo_json["download_link"],"{}_{}.zip".format(addon_name, repo_json["version"]))
+
+    else:
+      FetchJsonError(" This Package doesn't have a valid download link or your processor architecture is incompatible with it")
 
     os.remove('{}.json'.format(addon_name))
+
+    #__________________________#
+
+
 
 @click.command()
 @click.argument('addon_name')
@@ -95,10 +106,16 @@ def show(addon_name):
     except Exception:
         raise PackageNotFound(" Can't find package with name '{}'\n".format(addon_name))
 
-    print("\n\033[0;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(repo_json['name']))
+    if bool(repo_json["is_on_github"]):
+        latest_package_version = requests.get("https://api.github.com/repos/{}/{}/releases/latest".format(repo_json['author'], addon_name))
+        load_version = latest_package_version.json()["name"]
+
+    print("\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(repo_json['name']))
     print("\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}".format(repo_json['author']))
+    print("\033[1;36;40m Latest Version \033[0m\033[1;30;40m- \033[0m {}".format(load_version))
     print("\n\033[1;36;40m Package Description \033[0m\033[1;30;40m- \033[0m {}\n".format(repo_json['desc']))
 
+    os.remove('{}.json'.format(addon_name))
 
 fluoly.add_command(install)
 fluoly.add_command(show)
