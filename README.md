@@ -18,6 +18,7 @@
 </p>
 <h2 align="center">How does it work?</h2>
 <p align="center">
- ↦ It's a repo full of `.json` files that contains data about an Add-on/Tool, then Fluoly access that data & downloads the requested Add-on/tool.
+  ↦ It's a repo full of <code>.json</code> files that contains data about an Add-on/Tool, then Fluoly access that data & downloads the requested Add-on/tool.
 </p>
+
 
