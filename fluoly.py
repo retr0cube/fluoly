@@ -1,12 +1,13 @@
 # ________Modules__________ #
 
-import click
-import atexit
-import json
 import os
 import platform
+import atexit
+import json
+import click
 import requests
 import wget
+import send2trash
 
 # __________________________ #
 
@@ -36,7 +37,7 @@ os_type = platform.system()
 # __________________________ #
 
 
-print("\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 Fluoly by Retr0cube\n")
+print("\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 Fluoly by Retr0cube")
 
 # __________________________ #
 
@@ -50,11 +51,23 @@ def fluoly():
 
 
 @click.command()
+@click.option("--version")
 @click.argument("package_name")
-def install(package_name):
+def install(version, package_name):
 
     """Installs an Add-on."""
     atexit.register(exit_handler)
+
+    # __________________________ #
+
+    if os.path.isdir("downloads"):
+        send2trash.send2trash("downloads")
+        os.mkdir("downloads")
+        is_project_exists = True
+    elif not os.path.isdir("downloads"):
+        os.mkdir("downloads")
+        is_project_exists = False
+    os.chdir("downloads")
 
     # __________________________ #
 
@@ -85,7 +98,13 @@ def install(package_name):
         )
     )
 
+    # __________________________ #
+
     if repo_json["type"] == "tool":
+
+        if version is not None:
+            repo_json["version"] = version
+
         tool_installer = requests.get(
             "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}/{}.installer.json".format(
                 package_name, repo_json["version"], package_name
@@ -124,6 +143,8 @@ def install(package_name):
             ),
         )
 
+    # __________________________ #
+
     if repo_json["type"] == "plugin":
         plugin_installer = requests.get(
             "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}/{}.installer.json".format(
@@ -149,9 +170,7 @@ def install(package_name):
 
             if user_input == "N" or "n":
                 os.remove(
-                    "{}_{}.zip".format(
-                        package_name, plugin_json["package_version"]
-                    )
+                    "{}_{}.zip".format(package_name, plugin_json["package_version"])
                 )
             elif user_input == "Y" or "y":
                 pass
@@ -163,62 +182,96 @@ def install(package_name):
 
     # __________________________ #
 
+    if repo_json["type"] == "addon":
+        addon_installer = requests.get(
+            "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}/{}.installer.json".format(
+                package_name, repo_json["version"], package_name
+            )
+        )
 
-# @click.command()
-# @click.argument("package_name")
-# def show(package_name):
-#     """Shows info about an Add-on."""
+        addon_json = addon_installer.json()
 
-#     try:
-#         print(
-#             "\n\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Fetching JSON data...\n"
-#         )
-#         wget.download(
-#             "https://raw.githubusercontent.com/retr0cube/fluoly/master/repo/{}.json".format(
-#                 package_name
-#             ),
-#             "{}.json".format(package_name),
-#         )
+        print(
+            "\n\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Instaling {} {}...\n".format(
+                repo_json["name"], addon_json["package_version"]
+            )
+        )
 
-#         with open(
-#             "{}.json".format(package_name),
-#         ) as load_json:
-#             repo_json = json.load(load_json)
-#     except Exception:
-#         raise PackageNotFound(
-#             " Can't find package with name '{}'\n".format(package_name)
-#         )
+        if os.path.isfile(
+            "{}_{}.zip".format(package_name, addon_json["package_version"])
+        ):
+            user_input = input(
+                "\n\033[1;33;40m Warning \033[0m\033[1;30;40m- \033[0m The following file already exists do you want to keep it (Y/N)? "
+            )
+            print("")
 
-#     if bool(repo_json["is_on_github"]):
-#         latest_package_version = requests.get(
-#             "https://api.github.com/repos/{}/{}/releases/latest".format(
-#                 repo_json["author"], package_name
-#             )
-#         )
-#         load_version = latest_package_version.json()["name"]
+            if user_input == "N" or "n":
+                os.remove(
+                    "{}_{}.zip".format(package_name, addon_json["package_version"])
+                )
+            elif user_input == "Y" or "y":
+                pass
 
-#     print(
-#         "\n\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
-#             repo_json["name"]
-#         )
-#     )
-#     print(
-#         "\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}".format(
-#             repo_json["author"]
-#         )
-#     )
-#     print(
-#         "\033[1;36;40m Latest Version \033[0m\033[1;30;40m- \033[0m {}".format(
-#             load_version
-#         )
-#     )
-#     print(
-#         "\n\033[1;36;40m Package Description \033[0m\033[1;30;40m- \033[0m {}\n".format(
-#             repo_json["desc"]
-#         )
-#     )
+        wget.download(
+            addon_json["download_link"],
+            "{}_{}.zip".format(package_name, addon_json["package_version"]),
+        )
 
-#     os.remove("{}.json".format(package_name))
+    # __________________________ #
+
+    else:
+        FetchJsonError(
+            "The following package doesn't have a Valid link or Your system is incompatible\n"
+        )
+
+    # __________________________ #
+
+
+@click.command()
+@click.argument("package_name")
+def show(package_name):
+    """Shows info about an Add-on."""
+
+    # __________________________ #
+
+    try:
+        load_json = requests.get(
+            "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}.info.json".format(
+                package_name, package_name
+            )
+        )
+
+        repo_json = load_json.json()
+
+    except Exception:
+        raise PackageNotFound(
+            " Can't find package with name '{}'\n".format(package_name)
+        )
+
+    # __________________________ #
+
+    print(
+        "\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
+            repo_json["name"]
+        )
+    )
+    print(
+        "\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}".format(
+            repo_json["author"]
+        )
+    )
+    print(
+        "\033[1;36;40m Latest Version \033[0m\033[1;30;40m- \033[0m v{}".format(
+            repo_json["version"]
+        )
+    )
+    print(
+        "\n\033[0;35;40m Package Description \033[0m\033[1;30;40m- \033[0m {}\n".format(
+            repo_json["desc"]
+        )
+    )
+
+    # __________________________ #
 
 
 fluoly.add_command(install)
