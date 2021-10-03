@@ -33,5 +33,5 @@
 <h4 align="center">Note: Linux/Android are not yet supported.</h4>
 <h2 align="center">Usage</h2>
 <p align="center">
-  ↦ Currently, there are two commands: <code>install</code> & <code>show</code>. The <code>install</code> command will, well install a package, currently there are 3 types of packages: Tools, Add-ons & Plugins. The <code>show</code> command will show info about a package: name, version, author and description.
+  ↦ Currently, there are two commands: <code>install</code> & <code>show</code>. The <code>install</code> command will... well install a package, currently there are 3 types of packages: Tools, Add-ons & Plugins. The <code>show</code> command will show info about a package: name, version, author and description.
 </p>
