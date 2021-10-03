@@ -30,7 +30,7 @@
 <p align="center">
   ↦ Then you're good to go, if it says something similar to: <code>`fluoly` is not reognised as an interal or external command</code>, check if the installation path is <a href="https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/">added correctly to the PATH environnement variable.</a>
 </p>
-<h4 align="center">Note: Linux/Android are not yet supported.</h4>
+<h4 align="center">Note: Linux/Android are not currently yet supported.</h4>
 <h2 align="center">Usage</h2>
 <p align="center">
   ↦ Currently, there are two commands: <code>install</code> & <code>show</code>. The <code>install</code> command will... well install a package, currently there are 3 types of packages: Tools, Add-ons & Plugins. The <code>show</code> command will show info about a package: name, version, author and description.
