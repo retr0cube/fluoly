@@ -1,5 +1,5 @@
 available_language: en-US
-package_version: v0.0.1
+package_version: !!str v0.0.1
 Windows:
   x86: >-
     https://github.com/Bedrock-OSS/regolith/releases/download/0.0.1/regolith_0.0.1_Windows_x86.zip
