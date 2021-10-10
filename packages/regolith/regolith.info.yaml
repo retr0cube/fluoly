@@ -1,0 +1,7 @@
+type: tool
+name: Regolith
+version: 0.0.2
+desc: Regolith is an Addon Compiler for the Bedrock Edition of Minecraft.
+author: Bedrock-OSS
+available_versions:
+  - 0.0.1
