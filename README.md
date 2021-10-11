@@ -1,8 +1,9 @@
 <h1 align="center">Fluoly</h1>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/61835816/136807923-8e65758d-d12d-47b2-90de-0c510904c069.png" />
+  <img src="https://user-images.githubusercontent.com/61835816/136808971-70ab9d3b-acb6-4db1-a4f8-6ae562f3217b.png" />
 </p>
+
 
 <div align="center">
  <p><img src="https://img.shields.io/github/license/retr0cube/fluoly?color=red&amp;label=Repo%20License&amp;style=flat-square" alt="GitHub"> 
