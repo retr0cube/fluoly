@@ -2,7 +2,7 @@
 name = "fluoly"
 version = "0.0.1-alpha"
 description = "An Open Source Add-on Library/Repo for Minecraft: Bedrock Edition."
-authors = ["Your Name <you@example.com>"]
+authors = ["Retcy"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
