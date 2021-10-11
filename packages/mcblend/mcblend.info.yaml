@@ -1,0 +1,9 @@
+type: plugin
+name: MCBlend
+version: 9.1.0
+desc: >-
+  Blender 2.93 addon that exports models for custom entities for Minecraft
+  Bedrock Edition.
+author: Nusiq
+
+  

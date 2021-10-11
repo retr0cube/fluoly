@@ -1,0 +1,9 @@
+type: addon
+name: Fallen Kingdom
+version: 1.0.0.2
+desc: >-
+  This is an add-on developed by SmokeyStack. Gameplay involves trying to
+  survive the aftermath of The 60 Seconds
+author: SmokeyStack
+available_versions:
+  - 1.0.0.1
