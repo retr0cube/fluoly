@@ -10,6 +10,7 @@ python = "^3.6"
 requests = "^2.26.0 "
 click = "^8.0.1 "
 wget = "^3.2 "
+pyyaml = "^5.4.1"
 
 [tool.poetry.dev-dependencies]
 
