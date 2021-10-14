@@ -14,11 +14,11 @@
 </div>
 
 <p align="center">
- ↦ A Package manager that downloads any Add-on, tool/software or plugins you'd ever imagine.
+   ↦ A Package manager that downloads any Add-on, tool/software or plugins you'd ever imagine.
 </p>
 
 ## How does it work?
-↦ It's a repo full of <code>.json</code> files that contains data about an Add-on/Tool, then Fluoly access that data & downloads the requested Add-on/tool.
+   ↦ It's a repo full of <code>.json</code> files that contains data about an Add-on/Tool, then Fluoly access that data & downloads the requested Add-on/tool.
 ## Installation
 ### Windows:
 ↦ To install fluoly on Windows use the offline installer <a href="https://github.com/retr0cube/fluoly/releases/latest">Here</a>. The installer will prompt you to install it to all users which requires administrator permissions  or the current user only! Then choose the path of installation and Voilà! You now have fluoly installed, to check if it is installed correctly, open <code>powershell</code>, or Windows terminal if you are on Windows 11, then type <code>fluoly --help</code> if it shows something similar to this image, then you're good to go:
