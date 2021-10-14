@@ -6,7 +6,6 @@ import atexit
 import yaml
 import click
 import requests
-import urllib.request
 import wget
 
 # __________________________ #
