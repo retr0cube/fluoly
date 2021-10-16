@@ -1,0 +1,7 @@
+type: addon
+name: Debug Stick
+version: 1.0.0
+desc: >-
+  This  is a recreation of the debug stick from Minecraft Java Edition allows you to do 
+  edit block properties with just one item.
+author: MajestikButter
