@@ -1,4 +1,4 @@
-available_language: en-US
+available_languages: en-US
 package_version: v0.0.3
 Windows:
   x86: >-
