@@ -6,9 +6,10 @@ import atexit
 import yaml
 import click
 import requests
-import wget
+import modules.fget as wget
 
 # __________________________ #
+
 
 class PackageNotFound(Exception):
     pass
@@ -17,12 +18,15 @@ class PackageNotFound(Exception):
 class FetchJsonError(Exception):
     pass
 
+
 # ___Exit Handling Stuff____ #
+
 
 def exit_handler():
     print(
         "\n\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m\033[92m √ Done!\033[0m\n"
     )
+
 
 # __________________________ #
 
@@ -37,19 +41,28 @@ print(
 
 # __________________________ #
 
+
 @click.group()
 def fluoly():
     """An Open Source Library/Repo of Add-ons, Tools... for Minecraft: Bedrock Edition."""
 
+
 # __________________________ #
+
 
 @click.command()
 @click.option(
     "-sys",
     help="Let's you choose which operating system version of a package to choose. Note: This is only available for Tools.",
 )
-@click.option("--cpu_arch", "-c", help="Let's you choose which CPU architecture version of a package to choose. Note: This is only available for Tools.")
-@click.option("--version", "-v", help="Let's you choose which version of a package to choose.")
+@click.option(
+    "--cpu_arch",
+    "-c",
+    help="Let's you choose which CPU architecture version of a package to choose. Note: This is only available for Tools.",
+)
+@click.option(
+    "--version", "-v", help="Let's you choose which version of a package to choose."
+)
 @click.argument("package_name")
 def install(version, package_name, cpu_arch, sys):
 
@@ -65,7 +78,11 @@ def install(version, package_name, cpu_arch, sys):
     # __________________________ #
 
     try:
-        load_yaml = requests.get("https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}.info.yaml".format(package_name, package_name)).text
+        load_yaml = requests.get(
+            "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}.info.yaml".format(
+                package_name, package_name
+            )
+        ).text
 
         repo_yaml = yaml.safe_load(load_yaml)
 
@@ -116,54 +133,18 @@ def install(version, package_name, cpu_arch, sys):
     if repo_yaml["type"] == "tool":
 
         if cpu_arch is not None:
-            proc_arch = cpu_arch
+            proc_arch is cpu_arch
 
         if os is not None:
-            os_type = sys
+            os_type is sys
 
-        if os.path.isfile(
-            "{}_{}_{}.zip".format(package_name, package_yaml["package_version"], proc_arch)
-        ):
-            user_input = input(
-                "\n\033[1;33;40m Warning \033[0m\033[1;30;40m- \033[0m The following file already exists do you want to keep it (Y/N)? "
-            )
-            print("")
-
-            if user_input == "N" or "n":
-                os.remove(
-                    "{}_{}_{}.zip".format(
-                        package_name, package_yaml["package_version"], proc_arch
-                    )
-                )
-            elif user_input == "Y" or "y":
-                pass
-
-        wget.download(
-            package_yaml[str(os_type)][str(proc_arch)]
-        )
+        wget.download(package_yaml[os_type][proc_arch])
 
     # __________________________ #
 
     elif repo_yaml["type"] == "addon" or "plugin":
 
-        if os.path.isfile(
-            "{}_{}.zip".format(package_name, package_yaml["package_version"])
-        ):
-            user_input = input(
-                "\n\033[1;33;40m Warning \033[0m\033[1;30;40m- \033[0m The following file already exists do you want to keep it (Y/N)? "
-            )
-            print("")
-
-            if user_input == "N" or "n":
-                os.remove(
-                    "{}_{}.zip".format(package_name, package_yaml["package_version"])
-                )
-            elif user_input == "Y" or "y":
-                pass
-
-        wget.download(
-            package_yaml["download_link"]
-        )
+        wget.download(package_yaml["download_link"])
 
     # __________________________ #
 
