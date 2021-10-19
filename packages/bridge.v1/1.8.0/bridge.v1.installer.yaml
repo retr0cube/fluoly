@@ -1,0 +1,10 @@
+available_languages: en-US
+package_version: v1.8.0
+Windows:
+  x86: >-
+    https://github.com/bridge-core/bridge./releases/download/v1.8.0/bridge-web-setup-1.8.0.exe
+  AMD64: >-
+    https://github.com/bridge-core/bridge./releases/download/v1.8.0/bridge-web-setup-1.8.0.exe
+Linux:
+  AMD64: >-
+    https://github.com/bridge-core/bridge./releases/download/v1.8.0/bridge-1.8.0-x86_64.AppImage

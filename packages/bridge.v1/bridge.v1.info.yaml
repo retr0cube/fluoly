@@ -1,0 +1,10 @@
+type: tool
+name: Blockbench
+version: 1.8.3
+desc: A Minecraft Add-on Editor | We strive to provide the best development experience possible 
+author: SolvedDev, I guess ¯\_(ツ)_/¯
+available_versions:
+  - 1.8.0
+  - 1.8.1  
+  - 1.8.2
+  
