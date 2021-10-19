@@ -494,7 +494,7 @@ def callback_progress(blocks, block_size, total_size, bar_function):
 
     current_size = min(block_size * blocks, total_size)
     
-    progress = bar_function(current_size / 100000 , total_size / 100000, width)
+    progress = bar_function(current_size / 1000000 , total_size / 1000000, width)
     if progress:
         returned_progress = sys.stdout.write('\r'+ progress + ' \033[1;33;40mMB\033[0m')
 
