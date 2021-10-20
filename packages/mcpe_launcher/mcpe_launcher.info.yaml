@@ -1,0 +1,8 @@
+type: tool
+name: MCPE Launcher
+version: 0.2.5
+desc: >-
+  The main repository for the Linux Bedrock edition Minecraft launcher. 
+author: minecraft-linux 
+
+  
