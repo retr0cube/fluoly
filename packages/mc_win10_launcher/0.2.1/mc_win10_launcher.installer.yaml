@@ -1,5 +1,5 @@
 available_languages: en-US
 package_version: v0.2.1
 Windows:
-  AMD64:
+  AMD64: >-
     https://github.com/MCMrARM/mc-w10-version-launcher/releases/download/0.2.1/MCLauncher.zip
