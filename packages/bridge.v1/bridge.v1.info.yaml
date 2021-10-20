@@ -1,8 +1,8 @@
 type: tool
-name: Bridge. v1
+name: bridge.
 version: 1.8.3
 desc: A Minecraft Add-on Editor | We strive to provide the best development experience possible 
-author: Bridge. Team
+author: bridge. Team
 available_versions:
   - 1.8.0
   - 1.8.1  
