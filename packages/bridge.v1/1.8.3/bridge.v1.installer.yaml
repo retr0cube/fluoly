@@ -1,9 +1,7 @@
 available_languages: en-US
 package_version: v1.8.3
 Windows:
-  x86: >-
-    https://github.com/bridge-core/bridge./releases/download/v1.8.3/bridge-web-setup-1.8.3.exe
-  AMD64: >-
+  Universal: >-
     https://github.com/bridge-core/bridge./releases/download/v1.8.3/bridge-web-setup-1.8.3.exe
 Linux:
   AMD64: >-

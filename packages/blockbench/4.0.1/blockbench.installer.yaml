@@ -7,9 +7,7 @@ available_languages:
   - es-ES...
 package_version: v4.0.1
 Windows:
-  x86: >-
-    https://github.com/JannisX11/blockbench/releases/download/v4.0.1/Blockbench_4.0.1.exe
-  AMD64: >-
+  Universal: >-
     https://github.com/JannisX11/blockbench/releases/download/v4.0.1/Blockbench_4.0.1.exe
 Linux:
   AMD64: >-
