@@ -10,19 +10,31 @@ import modules.fget as wget
 
 # __________________________ #
 
+__VERSION__ = "0.1.0"
+
+# __________________________ #
 
 class PackageNotFound(Exception):
     pass
-
-
-class FetchJsonError(Exception):
-    pass
-
 
 # ___Exit Handling Stuff____ #
 
 
 def exit_handler():
+
+    load_repo = requests.get(
+        "https://api.github.com/repos/retr0cube/fluoly/releases/latest"
+    )
+
+    repo_json = load_repo.json()["name"]
+
+    if repo_json != __VERSION__:
+        print(
+            "\n\n\033[1;33;40m /!\ Warning /!\ You're using v{}, But v{} is the newest version available\033[0m".format(
+                __VERSION__, repo_json
+            )
+        )
+
     print(
         "\n\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m\033[92m √ Done!\033[0m\n"
     )
@@ -35,9 +47,7 @@ os_type = platform.system()
 
 # __________________________ #
 
-print(
-    "\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 \x1B[3mFluoly\x1B[0m by Retr0cube\n"
-)
+print("\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 \x1B[3mFluoly\x1B[0m")
 
 # __________________________ #
 
@@ -122,10 +132,12 @@ def install(version, package_name, cpu_arch, sys):
 
     package_yaml = yaml.safe_load(package_installer)
 
+    # __________________________ #
+
     print(
         "\n\033[1;35;40m Info \033[0m\033[1;30;40m- \033[0m Instaling {} {}...\n".format(
             repo_yaml["name"], package_yaml["package_version"]
-        )
+        ) 
     )
 
     # __________________________ #
@@ -138,20 +150,17 @@ def install(version, package_name, cpu_arch, sys):
         if os is not None:
             os_type is sys
 
-        wget.download(package_yaml[os_type][proc_arch])
+        try:
+            wget.download(package_yaml[os_type][proc_arch])
+        except:
+            wget.download(package_yaml[os_type]["Universal"])
+
 
     # __________________________ #
 
     elif repo_yaml["type"] == "addon" or "plugin":
 
         wget.download(package_yaml["download_link"])
-
-    # __________________________ #
-
-    else:
-        FetchJsonError(
-            "The following package doesn't have a Valid link or Your system is incompatible\n"
-        )
 
     # __________________________ #
 
