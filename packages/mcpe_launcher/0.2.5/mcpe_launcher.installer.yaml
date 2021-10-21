@@ -1,5 +1,5 @@
 available_languages: en-US
 package_version: v0.2.5
 Linux: 
-   AMD64: >- 
+  AMD64: >- 
     'https://github.com/ChristopherHX/linux-packaging-scripts/releases/download/v0.2.5-672/Minecraft_Bedrock_Launcher-x86_64-0.0.672.AppImage'
