@@ -1,0 +1,14 @@
+available_languages: 
+  - en-US
+  - fr-FR
+  - cz-CZ
+  - zh-ZH
+  - zh-TW
+  - es-ES...
+package_version: v4.0.2
+Windows:
+  Universal: >-
+    https://github.com/JannisX11/blockbench/releases/download/v4.0.2/Blockbench_4.0.2.exe
+Linux:
+  AMD64: >-
+    https://github.com/JannisX11/blockbench/releases/download/v4.0.2/Blockbench_4.0.2.AppImage
