@@ -1,7 +1,7 @@
 <h1 align="center">Fluoly</h1>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/61835816/138598056-49b4cfc9-e9c5-4917-97ce-d3d5936330cd.png"/>
+  <img src="https://user-images.githubusercontent.com/61835816/138651284-ca4ad676-9d0a-432e-8d6c-276c6cd21983.png"/>
 </p>
 
 <div align="center">
