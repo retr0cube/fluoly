@@ -1,8 +1,9 @@
 type: tool
 name: Blockbench
-version: 4.0.2
+version: 4.0.3
 desc: A boxy 3D model editor 
 author: JannisX11
 available_versions:
   - 4.0.0
   - 4.0.1
+  - 4.0.2
