@@ -4,13 +4,20 @@ import os
 import sys
 import platform
 import atexit
+import time
+
+import requests
 import yaml
 import click
-import requests
 
 # __________________________ #
 
-__VERSION__ = "0.1.1"
+__VERSION__ = "0.1.2"
+
+start = time.perf_counter()
+
+proc_arch = platform.machine()
+os_type = platform.system()
 
 # __________________________ #
 
@@ -19,24 +26,13 @@ class PackageNotFound(Exception):
     pass
 
 
-# ___Exit Handling Stuff____ #
-
-
-def exit_handler():
-    print("\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m\033[92m √ Done!\033[0m\n")
-
-
-# __________________________ #
-
-proc_arch = platform.machine()
-os_type = platform.system()
-
 # __________________________ #
 
 
-def download(download_link):
+def download(download_link, filename):
 
-    filename = download_link.split("/")[-1]
+    if filename == "default":
+        filename = download_link.split("/")[-1]
 
     if os.path.isfile(filename):
         user_input = input(
@@ -47,6 +43,7 @@ def download(download_link):
         if user_input == "Y" or "y":
             os.remove(filename)
     try:
+
         with open(filename, "wb") as f:
             response = requests.get(download_link, stream=True)
             total = response.headers.get("content-length")
@@ -68,20 +65,28 @@ def download(download_link):
                             percentage,
                             "\033[92m█\033[0m" * done,
                             " " * (65 - done),
-                            downloaded / 1000000,
-                            total / 1000000,
+                            "%.4f" % (downloaded / 1000000),
+                            "%.4f" % (total / 1000000),
                         )
                     )
                     sys.stdout.flush()
+
+        atexit.register(exit_handler)
+
     except KeyboardInterrupt:
         os.remove(filename)
+        print("\n\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m Aborted !")
 
     sys.stdout.write("\n")
 
 
 # __________________________ #
 
-print("\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 \x1B[3mFluoly\x1B[0m\n")
+print(
+    "\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m 🌿 \x1B[3mFluoly \x1B[0m\033[1;30;40m-\033[0m v{}\n".format(
+        __VERSION__
+    )
+)
 
 load_repo = requests.get(
     "https://api.github.com/repos/retr0cube/fluoly/releases/latest"
@@ -91,7 +96,7 @@ repo_json = load_repo.json()["name"]
 
 if repo_json != __VERSION__:
     print(
-        "\033[1;33;40m /!\ Warning /!\ You're using v{}, But v{} is the newest version available\033[0m".format(
+        "\033[1;33;40m /!\ Warning /!\ You're using v{}, But v{} is the newest version available\033[0m\n".format(
             __VERSION__, repo_json
         )
     )
@@ -120,13 +125,21 @@ def fluoly():
 @click.option(
     "--version", "-v", help="Let's you choose which version of a package to choose."
 )
+@click.option(
+    "--path",
+    "-p",
+    help="Let's you change the path where the package will be downloaded to.",
+)
+@click.option("--name", "-n", help="Changes the file name of the downloaded package.")
 @click.argument("package_name")
-def install(version, package_name, cpu_arch, sys):
+def install(version, package_name, cpu_arch, sys, path, name):
 
-    """Installs an Package."""
-    atexit.register(exit_handler)
+    """Installs a Package."""
 
     # __________________________ #
+
+    if path is not None and os.path.isdir(path):
+        os.chdir(r"{}".format(path))
 
     if not os.path.isdir("downloads"):
         os.mkdir("downloads")
@@ -151,7 +164,7 @@ def install(version, package_name, cpu_arch, sys):
     # __________________________ #
 
     print(
-        "\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
+        "\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
             repo_yaml["name"]
         )
     )
@@ -198,23 +211,47 @@ def install(version, package_name, cpu_arch, sys):
             os_type is sys
 
         try:
-            download(package_yaml[os_type][proc_arch])
+            if name is not None:
+                download(package_yaml[os_type][proc_arch], name)
+            else:
+                download(package_yaml[os_type][proc_arch], "default")
         except KeyError:
-            download(package_yaml[os_type]["Universal"])
+            if name is not None:
+                download(package_yaml[os_type]["Universal"], name)
+            else:
+                download(package_yaml[os_type]["Universal"], "default")
 
     # __________________________ #
 
     elif repo_yaml["type"] == "addon" or "plugin":
 
-        download(package_yaml["download_link"])
+        if name is not None:
+            download(package_yaml["download_link"], name)
+        else:
+            download(package_yaml["download_link"], "default")
 
-    # __________________________ #
+
+# ___Exit Handling Stuff____ #
+
+
+def exit_handler():
+    finish = time.perf_counter()
+
+    print(
+        "\n\033[0;32;40m Info \033[0m\033[1;30;40m- \033[0m\033[92m √ Done in {}s !\033[0m\n".format(
+            "%.3f" % (finish - start)
+        )
+    )
+
+
+# __________________________ #
 
 
 @click.command()
+@click.option("--read_me", "-md", help="Shows the README.md of a package")
 @click.argument("package_name")
-def show(package_name):
-    """Shows info about an Add-on."""
+def find(package_name, read_me):
+    """Shows info about a Package."""
 
     # __________________________ #
 
@@ -255,17 +292,32 @@ def show(package_name):
             repo_yaml["version"]
         )
     )
-    print(
-        "\n\033[0;35;40m Package Description \033[0m\033[1;30;40m- \033[0m {}\n".format(
-            repo_yaml["desc"]
+
+    if read_me is None:
+        print(
+            "\n\033[0;35;40m Package Description \033[0m\033[1;30;40m- \033[0m {}\n".format(
+                repo_yaml["desc"]
+            )
         )
-    )
+    elif read_me is not None:
+
+        package_md = requests.get(
+            "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/README.md".format(
+                package_name
+            )
+        ).text
+
+        print(
+            "\n\033[0;35;40m Package's README.MD file \033[0m\033[1;30;40m-\n\033[0m{}\n".format(
+                package_md
+            )
+        )
 
     # __________________________ #
 
 
 fluoly.add_command(install)
-fluoly.add_command(show)
+fluoly.add_command(find)
 
 # __________________________#
 
