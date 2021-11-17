@@ -22,7 +22,7 @@
      - ![Windows](https://github.com/retr0cube/fluoly#windows)
 - ![Usage](https://github.com/retr0cube/fluoly#usage)
 ## 🖥 Installation
-### ↠ Windows:
+###  Windows:
 - To install fluoly on Windows use the installer ![here](https://github.com/retr0cube/fluoly/releases/latest). 
   The installer will prompt you to choose the path of installation, click `Next` and the installation will start, & **Voilà**! You now have fluoly installed.
   Then to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --help` if it    shows something similar to this image, then you're good to go:
@@ -33,18 +33,25 @@
 - If it dumps an error similar to: `"fluoly" is not recognised as an interal or external command` or `fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.` , Then check if the installation path is ![Added correctly to the PATH environnement variable.]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/")
 
 ## 📚 Usage
-- Currently, there are two commands with the `install` command having some options: 
+- Currently, there are two commands with the `install` command having more options: 
 ```
   install - Installs an Package.
       Options:
-          -sys TEXT             Let's you choose which operating system version of a
+          -sys           TEXT   Let's you choose which operating system version of a
                                 package to choose. Note: This is only available for
                                 Tools.
           -c, --cpu_arch TEXT   Let's you choose which CPU architecture version of a
                                 package to choose. Note: This is only available for
                                 Tools.
-           -v, --version TEXT   Let's you choose which version of a package to choose.
+          -v, --version  TEXT   Let's you choose which version of a package to choose.
+          -p, --path     TEXT   Let's you change the path where the package will be
+                                downloaded to.
+          -n, --name     TEXT   Changes the file name of the downloaded package.
 
-  show    - Shows info about an Add-on. 
+  find - Shows info about an Add-on. 
+      Options:
+          -md, --read_me TEXT  Shows the README.md of a package
+           
+  
 ```
 
