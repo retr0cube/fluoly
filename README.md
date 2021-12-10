@@ -62,7 +62,6 @@ fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, scr
   find - Shows info about an Add-on. 
       Options:
           -md, --read_me TEXT  Shows the README.md of a package
-           
   
 ```
 
