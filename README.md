@@ -31,8 +31,10 @@
   <img src="https://user-images.githubusercontent.com/61835816/138596786-28d14256-f957-403d-ad92-f8fbf4429a2b.png" />
 </p>  
 
-- If it dumps an error similar to: ```"fluoly" is not recognised as an interal or external command```
-  or ```fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.```; Then check if the installation path is Added correctly to the ![PATH environnement variable ↗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
+- If it dumps an error similar to: 
+  ```"fluoly" is not recognised as an interal or external command```;
+ ```fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.```.
+- Please check if the installation path is Added correctly to the ![PATH environnement variable ↗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
 
 ## 📚 Usage
