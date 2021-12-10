@@ -6,6 +6,7 @@ import platform
 import atexit
 import time
 
+from rich.traceback import install
 from rich.console import Console
 from rich.markdown import Markdown
 import requests
@@ -15,21 +16,14 @@ import click
 # __________________________ #
 
 # Version of the program
-__VERSION__ = "0.2.0"
+__VERSION__ = "0.2.1"
 
 # The start time of the program
 start = time.perf_counter()
 
-# detects the user's operating system and the processor architecture
-proc_arch = platform.machine()
-os_type = platform.system()
-
-# __________________________ #
-
-# An Exception class to handle errors about non Existing Packages
-class PackageNotFound(Exception):
-    pass
-
+# Rich formatting
+console = Console()
+install()
 
 # __________________________ #
 
@@ -52,13 +46,13 @@ def get_nonexistant_path(fname_path):
 # __________________________ #
 
 
-def download(download_link, filename):
+def download(download_link, filename=None):
     """
     Download the file from the link and save it to the filename
     """
 
-    # Check the filename :param is "default"
-    if filename == "default":
+    # Check the filename :param
+    if not filename:
         filename = download_link.split("/")[-1]
 
     # Check if the file already exists
@@ -124,13 +118,16 @@ def download(download_link, filename):
 
 
 @click.group()
+@click.version_option(__VERSION__)
 def fluoly():
     """An Open Source Library/Repo of Add-ons, Tools... for Minecraft: Bedrock Edition."""
 
     # __________________________ #
 
     print(
-        "\n     🌿 \x1B[3mFluoly \x1B[0m\033[1;30;40m-\033[0m v{}\n".format(__VERSION__)
+        "\n      \U0001F33F \x1B[3mFluoly \x1B[0m\033[1;30;40m-\033[0m v{}\n".format(
+            __VERSION__
+        )
     )
 
     # Send an HTTP request to the GitHub API to get the latest release of fluoly :D
@@ -138,7 +135,7 @@ def fluoly():
         "https://api.github.com/repos/retr0cube/fluoly/releases/latest"
     )
     # Loads the Latests version number
-    repo_json = load_repo.json()["name"]
+    repo_json = load_repo.json()["tag_name"]
 
     # Checks if the program's version number atches the latest release
     if repo_json != __VERSION__:
@@ -154,7 +151,8 @@ def fluoly():
 
 @click.command()
 @click.option(
-    "-sys",
+    "--machine",
+    "-m",
     help="Let's you choose which operating system version of a package to choose. Note: This is only available for Tools.",
 )
 @click.option(
@@ -172,14 +170,13 @@ def fluoly():
 )
 @click.option("--name", "-n", help="Changes the file name of the downloaded package.")
 @click.argument("package_name")
-def install(version, package_name, cpu_arch, sys, path, name):
-
+def install(version, package_name, cpu_arch, machine, path, name):
     """Installs a Package."""
 
     # __________________________ #
 
     # Check if the "downloads" folder exists
-    if path is not None and os.path.isdir(path):
+    if path and os.path.isdir(path):
         # Changes the working directory to the "downloads" folder
         os.chdir(r"{}".format(path))
 
@@ -192,46 +189,23 @@ def install(version, package_name, cpu_arch, sys, path, name):
 
     # __________________________ #
 
-    try:
-        # Send an HTTP request to the GitHub API to get the Info about a package
-        load_yaml = requests.get(
-            "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}.info.yaml".format(
-                package_name, package_name
-            )
-        ).text
-
-        # Load the YAML file
-        repo_yaml = yaml.safe_load(load_yaml)
-
-        # __________________________ #
-
-        # Check if the Package the Package name
-        print(
-            "\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
-                repo_yaml["name"]
-            )
+    # Send an HTTP request to the GitHub API to get the Info about a package
+    load_yaml = requests.get(
+        "https://raw.githubusercontent.com/retr0cube/fluoly/master/packages/{}/{}.info.yaml".format(
+            package_name, package_name
         )
+    ).text
 
-        # __________________________ #
+    # Load the YAML file
+    repo_yaml = yaml.safe_load(load_yaml)
 
-        # Check if the Package has a description
-        print(
-            "\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}".format(
-                repo_yaml["author"]
-            )
-        )
-
-    # if the checks failed and raise a "KeyError" Exception a "PackageNotFound" exception will be raised
-    except KeyError:
-        raise PackageNotFound(
-            " Can't find package with name '{}'\n".format(package_name)
-        )
+    if not "type" in repo_yaml:
+        raise ValueError(" Can't find package with name '{}'\n".format(package_name))
 
     # __________________________ #
 
-    # Check if the "version" is not None
-    if version is not None:
-        repo_yaml["version"] = version
+    # Decides which version to install depending on the user's choice
+    repo_yaml["version"] = version or repo_yaml["version"]
 
     # __________________________ #
 
@@ -245,12 +219,21 @@ def install(version, package_name, cpu_arch, sys, path, name):
     # Loads the Installer YAML file
     package_yaml = yaml.safe_load(package_installer)
 
+    if not "package_version" in package_yaml:
+        raise ValueError(" Unvalid package version '{}'\n".format(version))
+
     # __________________________ #
 
-    # Prints the install message
+    # Print the package's name
     print(
-        "\n\033[1;36;40m Info \033[0m\033[1;30;40m- \033[0m Instaling {} {}...\n".format(
-            repo_yaml["name"], package_yaml["package_version"]
+        """\n\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}
+\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}
+
+\033[1;36;40m Info \033[0m\033[1;30;40m- \033[0m Instaling {} {}...\n""".format(
+            repo_yaml["name"],
+            repo_yaml["author"],
+            repo_yaml["name"],
+            package_yaml["package_version"],
         )
     )
 
@@ -259,44 +242,30 @@ def install(version, package_name, cpu_arch, sys, path, name):
     # Check if the Package's type is a tool
     if repo_yaml["type"] == "tool":
 
-        # Check if "cpu_arch" is not None
-        if cpu_arch is not None:
-            proc_arch is cpu_arch
+        # detects the user's operating system and the processor architecture
+        os_type = machine or platform.system()
+        proc_arch = cpu_arch or platform.machine()
 
-        # Check if "sys" is None
-        if sys is not None:
-            os_type is sys
+        # __________________________ #
 
-        try:
-            # Checks if "name" is None or not
-            if name is not None:
-                download(package_yaml[os_type][proc_arch], name)
-            else:
-                download(package_yaml[os_type][proc_arch], "default")
-        # if the package is Universal this exception will be raised
-        except KeyError:
-            # Checks if "name" is None or not
-            if name is not None:
-                download(package_yaml[os_type]["Universal"], name)
-            else:
-                download(package_yaml[os_type]["Universal"], "default")
+        download(
+            package_yaml[os_type][
+                proc_arch if proc_arch in package_yaml[os_type] else "Universal"
+            ]
+        )
 
     # __________________________ #
 
     # Check if the Package's type is a plugin or an add-on
-    elif repo_yaml["type"] == "addon" or "plugin":
+    else:
 
         # Check if "sys" is None
-        if sys or cpu_arch is not None:
+        if machine or cpu_arch:
             print(
                 "\n\033[1;31;40m Notice \033[0m\033[1;30;40m- \033[0m You can't use --cpu_arch or --os with this package type."
             )
 
-        # Check if "name" is None or not
-        if name is not None:
-            download(package_yaml["download_link"], name)
-        else:
-            download(package_yaml["download_link"], "default")
+        download(package_yaml["download_link"], name)
 
 
 # ___Exit Handling Stuff____ #
@@ -334,37 +303,27 @@ def find(package_name, read_me):
 
         # Load the YAML file
         repo_yaml = yaml.safe_load(load_yaml)
+        dict.get(repo_yaml["type"])
 
-        print(
-            "\033[1;36;40m Package Type \033[0m\033[1;30;40m- \033[0m {}\n".format(
-                repo_yaml["type"].title()
-            )
-        )
-
-    # if the checks failed and raise a "KeyError" Exception a "PackageNotFound" exception will be raised
+    # if the checks failed and raise a "KeyError" Exception a "ValueError" exception will be raised
     except KeyError:
-        raise PackageNotFound(
-            " Can't find package with name '{}'\n".format(package_name)
-        )
+        raise ValueError(" Can't find package with name '{}'\n".format(package_name))
 
     # __________________________ #
 
-    # Prints the package name
     print(
-        "\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}".format(
-            repo_yaml["name"]
-        )
-    )
-    # Prints the package Author
-    print(
-        "\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}".format(
-            repo_yaml["author"]
-        )
-    )
-    # prints the package version
-    print(
-        "\033[1;36;40m Latest Version \033[0m\033[1;30;40m- \033[0m v{}".format(
-            repo_yaml["version"]
+        """
+\033[1;36;40m Package Type \033[0m\033[1;30;40m- \033[0m {}
+    
+\033[1;36;40m Package Name \033[0m\033[1;30;40m- \033[0m {}
+\033[0;35;40m Author \033[0m\033[1;30;40m- \033[0m {}
+    
+\033[1;36;40m Latest Version \033[0m\033[1;30;40m- \033[0m v{}
+        """.format(
+            repo_yaml["type"].title(),
+            repo_yaml["name"],
+            repo_yaml["author"],
+            repo_yaml["version"],
         )
     )
 
@@ -375,7 +334,7 @@ def find(package_name, read_me):
                 repo_yaml["desc"]
             )
         )
-    elif read_me:
+    else:
 
         # Send an HTTP request to the GitHub API to get the README.md of a package
         package_md = requests.get(
@@ -384,13 +343,10 @@ def find(package_name, read_me):
             )
         ).text
 
-        print("\n\033[0;35;40m Package's README.MD file \033[0m\033[1;30;40m:\n\033[0m")
-
-        # Formats the Markdown file
-        console = Console()
-
-        console.print(Markdown(package_md))
-        print("")
+        # prints and formats the Markdown file
+        print(
+            "\n\033[0;35;40m Package's README.MD file \033[0m:033[1;30;40m:\033[0m\n{}"
+        ).format(console.print(Markdown(package_md)))
 
     # __________________________ #
 
