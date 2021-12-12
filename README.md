@@ -1,7 +1,6 @@
-<h1 align="center">Fluoly</h1>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/61835816/138651284-ca4ad676-9d0a-432e-8d6c-276c6cd21983.png"/>
+  <img src="https://user-images.githubusercontent.com/61835816/145718031-27332899-d84b-42d0-8476-8572aae724d4.png"/>
 </p>
 
 
