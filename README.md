@@ -25,19 +25,32 @@
 ### ↠ Windows:
 - To install fluoly on Windows use the installer [here ⇗](https://github.com/retr0cube/fluoly/releases/latest),
   Then the installer will prompt you to choose the path of installation, click `Next` and the installation will start, & **Voilà**! You now have fluoly installed.
-- Next to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --version` if it shows something similar to this image, then you're good to go ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png). 
-
+- Next to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --version` if it shows something similar to this image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), then you're good to go. 
 - If it dumps an error similar to: 
 ```
 "fluoly" is not recognised as an interal or external command
 ```
 ***or:***
-
 ```
 fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.
 ```
 - Please check if the installation path is Added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
+### ↠ Linux:
+- To install fluoly on Linux, open terminal and type the following commands:
+```bash
+git clone https://github.com/retr0cube/fluoly.git
+cd ./fluoly
+pip install.
+```
+**These commands will download and install fluoly as a python module, when the process is done delete the `fluoly` directory.**
+
+- Then to test if it's installed correctly, type the following command:
+```
+python -m fluoly --version
+```
+- if it shows the following image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), then you're good to go!
+- if the past step doesn't work, please go back and repeat the installation process, if that didn't help don't hesitate to open an issue [here ⇗](https://github.com/retr0cube/fluoly/issues). 
 
 ## 📚 Usage
 - Currently, there are two commands with the `install` command having more options: 
