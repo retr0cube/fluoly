@@ -18,7 +18,7 @@
 - [Installation](https://github.com/retr0cube/fluoly#installation)
      - [Windows](https://github.com/retr0cube/fluoly#windows)
 - [Usage](https://github.com/retr0cube/fluoly#usage)
-## ❔ Introduction?
+## ❔ Introduction
 - it's a Package manager that downloads any Minecraft: Bedrock Edition Add-on, tool/software or plugins you'd ever imagine.
 ## 🖥 Installation
 ###  Windows:
