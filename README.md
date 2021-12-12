@@ -34,7 +34,7 @@
 ```
 "fluoly" is not recognised as an interal or external command
 ```
-- or:
+***or:***
 
 ```
 fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.
