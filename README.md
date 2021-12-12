@@ -37,7 +37,7 @@ fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, scr
 ```
 - Please check if the installation path is Added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
-### ↠ _Linux_:
+### ↠ _Build from source_:
 - To install fluoly on Linux, open terminal and type the following commands:
 ```bash
 git clone https://github.com/retr0cube/fluoly.git
