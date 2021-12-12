@@ -49,7 +49,7 @@ pip install.
 ```
 python -m fluoly --version
 ```
-- if it shows the following image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), then you're good to go!
+- if it shows the following image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), Then you're good to go 
 - if the past step doesn't work, please go back and repeat the installation process, if that didn't help don't hesitate to open an issue [here ⇗](https://github.com/retr0cube/fluoly/issues). 
 
 ## 📚 Usage
