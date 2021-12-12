@@ -22,7 +22,7 @@
 ## ❔ Introduction
 - it's a Package manager that downloads any Minecraft: Bedrock Edition Add-on, tool/software or plugins you'd ever imagine.
 ## 🖥 Installation
-### ↠ Windows:
+### ↠ _Windows_:
 - To install fluoly on Windows use the installer [here ⇗](https://github.com/retr0cube/fluoly/releases/latest),
   Then the installer will prompt you to choose the path of installation, click `Next` and the installation will start, & **Voilà**! You now have fluoly installed.
 - Next to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --version` if it shows something similar to this image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), then you're good to go. 
@@ -36,7 +36,7 @@ fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, scr
 ```
 - Please check if the installation path is Added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
-### ↠ Linux:
+### ↠ _Linux_:
 - To install fluoly on Linux, open terminal and type the following commands:
 ```bash
 git clone https://github.com/retr0cube/fluoly.git
