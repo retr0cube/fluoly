@@ -53,7 +53,9 @@ fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, scr
           -p, --path     TEXT   Let's you change the path where the package will be
                                 downloaded to.
           -n, --name     TEXT   Changes the file name of the downloaded package.
+```
 
+```
   find - Shows info about an Add-on. 
       Options:
           -md, --read_me TEXT  Shows the README.md of a package
