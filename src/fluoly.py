@@ -167,11 +167,35 @@ def fluoly():
     "--path",
     "-p",
     help="Let's you change the path where the package will be downloaded to.",
+    type=click.Path(exists=True)
 )
 @click.option("--name", "-n", help="Changes the file name of the downloaded package.")
 @click.argument("package_name")
 def install(version, package_name, cpu_arch, machine, path, name):
     """Installs a Package."""
+
+    if package_name == "self":
+        print("\n You can't install yourself !\n")
+        sys.exit(1)    
+    if package_name == "fluoly":
+        # Send an HTTP request to the GitHub API to get the latest release of fluoly :D
+        load_repo = requests.get(
+            "https://api.github.com/repos/retr0cube/fluoly/releases/latest"
+        )
+        # Loads the Latests version number
+        repo_json = load_repo.json()
+
+        if __VERSION__ == repo_json["tag_name"]:
+            print(
+                " \033[1;30;40m- \033[0mYou're using the latest version of Fluoly \033[1;30;40m- \033[0m\n"
+            )
+            sys.exit(1)
+        else:
+            download(download_link=repo_json["assets"][0]["browser_download_url"])
+
+
+
+        sys.exit(1)
 
     # __________________________ #
 
@@ -267,7 +291,6 @@ def install(version, package_name, cpu_arch, machine, path, name):
 
         download(package_yaml["download_link"], name)
 
-
 # ___Exit Handling Stuff____ #
 
 
@@ -287,6 +310,7 @@ def exit_handler():
 
 @click.command()
 @click.option("--read_me", "-md", help="Shows the README.md of a package", is_flag=True)
+@click.option("--tag", "-t", help="Shows the content of a tag", is_flag=True)
 @click.argument("package_name")
 def find(package_name, read_me):
     """Shows info about a Package."""
