@@ -24,11 +24,7 @@
 ### ↠ Windows:
 - To install fluoly on Windows use the installer [here ⇗](https://github.com/retr0cube/fluoly/releases/latest),
   Then the installer will prompt you to choose the path of installation, click `Next` and the installation will start, & **Voilà**! You now have fluoly installed.
-- Next to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --help` if it    shows something similar to this image, then you're good to go:
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/61835816/138596786-28d14256-f957-403d-ad92-f8fbf4429a2b.png" />
-</p>  
+- Next to check if it's installed correctly, open `powershell`, or Windows terminal if you are on Windows 11, then type `fluoly --version` if it shows something similar to this image, then you're good to go ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png). 
 
 - If it dumps an error similar to: 
 ```
