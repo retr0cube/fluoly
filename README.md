@@ -4,13 +4,12 @@
   <img src="https://user-images.githubusercontent.com/61835816/138651284-ca4ad676-9d0a-432e-8d6c-276c6cd21983.png"/>
 </p>
 
-<div align="center">
- <p><img src="https://img.shields.io/github/license/retr0cube/fluoly?color=red&amp;label=Repo%20License&amp;style=flat-square" alt="GitHub"> 
- <img src="https://img.shields.io/github/downloads/retr0cube/fluoly/total?color=blue&amp;label=Downloads&amp;style=flat-square" alt="GitHub all releases"> 
- <img src="https://img.shields.io/github/issues/retr0cube/fluoly?color=green&amp;label=Issues&amp;style=flat-square" alt="GitHub issues"> 
- <a href="https://github.com/retr0cube/fluoly/stargazers">
- <img src="https://img.shields.io/github/stars/retr0cube/fluoly?color=yellow&amp;label=Stars&amp;style=flat-square" alt="GitHub stars"></a>
 
+<div align="center">
+ <img alt="GitHub" src="https://img.shields.io/github/license/retr0cube/fluoly?logo=github&style=for-the-badge">
+ <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/retr0cube/fluoly/total?color=gree&logo=Markdown&style=for-the-badge"> 
+ <img alt="GitHub issues" src="https://img.shields.io/github/issues/retr0cube/fluoly?color=yellow&logo=GitHub%20Actions&logoColor=white&style=for-the-badge">
+ <a href="https://github.com/retr0cube/fluoly/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/retr0cube/fluoly?logo=Riseup&style=for-the-badge"></a>
 </div>
 
 <p align="center">
