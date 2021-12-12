@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/61835816/145718031-27332899-d84b-42d0-8476-8572aae724d4.png"/>
+  <img src="https://user-images.githubusercontent.com/61835816/145718141-78fe305a-0017-4539-bd02-3dd5c1f5a51a.png"/>
 </p>
 
 
@@ -11,14 +11,15 @@
  <a href="https://github.com/retr0cube/fluoly/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/retr0cube/fluoly?logo=Riseup&style=for-the-badge"></a>
 </div>
 
-<p align="center">
-   ↦ A Package manager that downloads any Add-on, tool/software or plugins you'd ever imagine.
-</p>
+
 
 ## 🔖 Index:
+- [Introduction](https://github.com/retr0cube/fluoly#introduction)
 - [Installation](https://github.com/retr0cube/fluoly#installation)
      - [Windows](https://github.com/retr0cube/fluoly#windows)
 - [Usage](https://github.com/retr0cube/fluoly#usage)
+## ❔ Introduction?
+- it's a Package manager that downloads any Minecraft: Bedrock Edition Add-on, tool/software or plugins you'd ever imagine.
 ## 🖥 Installation
 ###  Windows:
 - To install fluoly on Windows use the installer [here](https://github.com/retr0cube/fluoly/releases/latest),
