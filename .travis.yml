@@ -7,6 +7,10 @@ python:
   - "3.10"  
   - "nightly"  # nightly build
 
+install:
+  - pip install .
+  
 # command to run tests
 script:
+  - cd tests
   - python ./test-fluoly.py
