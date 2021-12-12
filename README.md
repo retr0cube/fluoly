@@ -39,7 +39,7 @@
 ```
 fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.
 ```
-- Please check if the installation path is Added correctly to the [PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
+- Please check if the installation path is Added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
 
 ## 📚 Usage
