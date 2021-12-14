@@ -1,0 +1,7 @@
+tools:
+    - blockbench
+    - bridge.v1
+    - mcpe_launcher
+    - regolith
+plugins:
+    - mcblend
