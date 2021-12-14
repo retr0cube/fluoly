@@ -42,7 +42,7 @@ fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, scr
 ```bash
 git clone https://github.com/retr0cube/fluoly.git
 cd ./fluoly
-pip install.
+pip install .
 ```
 **These commands will download and install fluoly as a python module, when the process is done delete the `fluoly` directory.**
 
