@@ -54,7 +54,9 @@ python -m fluoly --version
 - if the past step doesn't work, please go back and repeat the installation process, if that didn't help don't hesitate to open an issue [here ⇗](https://github.com/retr0cube/fluoly/issues). 
 
 ## 📚 Usage
-- Currently, there are two commands with the `install` command having more options: 
+- Currently, there are two commands:
+
+#### - ⬇ Install:
 ```
   install - Installs an Package.
       Options:
@@ -69,7 +71,7 @@ python -m fluoly --version
                                 downloaded to.
           -n, --name     TEXT   Changes the file name of the downloaded package.
 ```
-
+#### - 🔍 Find:
 ```
   find - Shows info about an Add-on. 
       Options:
