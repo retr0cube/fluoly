@@ -1,11 +1,11 @@
 # Contributing to 🌿 Fluoly
 - I love your input! I want to make contributing to this project as easy and transparent as possible, whether it's:
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
-- Becoming a maintainer
+> - Reporting a bug
+> - Discussing the current state of the code
+> - Submitting a fix
+> - Proposing new features
+> - Becoming a maintainer
 
 ## 🪒 I Develop with Github
 - I use github to host code, to track issues and feature requests, as well as accept pull requests.
@@ -21,7 +21,7 @@
 6. Issue that pull request!
 
 ## 🖥 Any contributions you make will be under the MPL-2.0 Software License
-- In short, when you submit code changes, your submissions are understood to be under the same [MPL-2.0 ⇗](https://choosealicense.com/licenses/mpl-2.0/) that covers the project. Feel free to contact the maintainers if that's a concern.
+- In short, when you submit code changes, your submissions are understood to be under the same [license ⇗](https://choosealicense.com/licenses/mpl-2.0/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
 ## 📢 Report bugs using Github's [issues ⇗](https://github.com/retr0cube/fluoly/issues)
 - I use GitHub issues to track public bugs. Report a bug by opening a new issue; it's that easy!
@@ -43,7 +43,7 @@
 ## 🥻 Use a Consistent Coding Style
 
 * **4 spaces** for indentation rather than tabs, **2 spaces** for `.yaml` package files.
-* You can try running `pylint` or an online for style unification.
+* You can try running `pylint` or an online website for style unification.
 
 ## 📜 License
 - By contributing, you agree that your contributions will be licensed under the MPL-2.0 License.
