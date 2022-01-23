@@ -14,7 +14,7 @@
 
 
 
-## 🔖 Index:
+## 🔖 Contents:
 - [Introduction ⇗](https://github.com/retr0cube/fluoly#-introduction)
 - [Installation ⇗](https://github.com/retr0cube/fluoly#-installation)
      - [Windows ⇗](https://github.com/retr0cube/fluoly#-windows)
