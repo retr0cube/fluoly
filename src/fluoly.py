@@ -7,7 +7,6 @@ import atexit
 import time
 
 from rich.traceback import install
-from rich.console import Console
 from rich.markdown import Markdown
 import requests
 import yaml
@@ -153,20 +152,20 @@ def fluoly():
 @click.option(
     "--machine",
     "-m",
-    help="Let's you choose which operating system version of a package to choose. Note: This is only available for Tools.",
+    help="Lets you choose which operating system version of a package to choose. Note: This is only available for Tools.",
 )
 @click.option(
     "--cpu_arch",
     "-c",
-    help="Let's you choose which CPU architecture version of a package to choose. Note: This is only available for Tools.",
+    help="Lets you choose which CPU architecture version of a package to choose. Note: This is only available for Tools.",
 )
 @click.option(
-    "--version", "-v", help="Let's you choose which version of a package to choose."
+    "--version", "-v", help="Lets you choose which version of a package to choose."
 )
 @click.option(
     "--path",
     "-p",
-    help="Let's you change the path where the package will be downloaded to.",
+    help="Lets you change the path where the package will be downloaded to.",
     type=click.Path(exists=True)
 )
 @click.option("--name", "-n", help="Changes the file name of the downloaded package.")
@@ -177,7 +176,7 @@ def install(version, package_name, cpu_arch, machine, path, name):
     if package_name == "self":
         print("\n You can't install yourself !\n")
         sys.exit(1)    
-    if package_name == "fluoly":
+    elif package_name == "fluoly":
         # Send an HTTP request to the GitHub API to get the latest release of fluoly :D
         load_repo = requests.get(
             "https://api.github.com/repos/retr0cube/fluoly/releases/latest"
