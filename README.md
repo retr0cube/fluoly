@@ -21,7 +21,7 @@
      - [Build from source (Linux) ⇗](https://github.com/retr0cube/fluoly#-build-from-source)
 - [Usage ⇗](https://github.com/retr0cube/fluoly#-usage)
 ## ❔ Introduction
-- Fluoly is a package manager that lets you download any Minecraft: Bedrock Edition Add-on, tool or plugins you'd ever imagine by only using a CLI.
+- Fluoly is a package manager that lets you download any Minecraft: Bedrock Edition Add-on, tool or plugins you'd ever imagine by only using a CLI & completely free.
 ## 🖥 Installation
 ###  🪟 _Windows_:
 - To install fluoly on Windows use the official binaries [here ⇗](https://github.com/retr0cube/fluoly/releases/latest), open it and 
@@ -35,10 +35,10 @@ then the installer will prompt you to choose the path of installation, click `Ne
 ```
 fluoly: The term 'fluoly' is not recognized as a name of a cmdlet, function, script file, or executable program.
 ```
-- Please check if the installation path is Added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
+- Please check if the installation path is added correctly to the ![PATH environnement variable ⇗]("https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10").
 
 ### 💿 _Build from source_:
-- To Buid fluoly from source, open terminal and type the following commands:
+- To build fluoly from source, open the terminal and type the following commands:
 ```bash
 git clone https://github.com/retr0cube/fluoly.git
 cd ./fluoly
@@ -46,12 +46,12 @@ pip install .
 ```
 **These commands will download and install fluoly as a python module, when the process is done delete the `fluoly` directory.**
 
-- Then to test if it's installed correctly, type the following command:
+- To test if it's installed correctly, type the following command:
 ```
 python -m fluoly --version
 ```
 - if it shows the following image ![image](https://user-images.githubusercontent.com/61835816/145718519-aa54831b-9a57-4bb6-b52a-1bf53c20db08.png), Then you're good to go 
-- if the past step doesn't work, please go back and repeat the installation process, if that didn't help don't hesitate to open an issue [here ⇗](https://github.com/retr0cube/fluoly/issues). 
+- if the latter didn't work, please repeat the installation process, if that didn't help either, don't hesitate to open an issue [here ⇗](https://github.com/retr0cube/fluoly/issues). 
 
 ## 📚 Usage
 - Currently, there are two commands:
@@ -60,16 +60,16 @@ python -m fluoly --version
 ```
   install - Installs an Package.
       Options:
-          -sys           TEXT   Let's you choose which operating system version of a
+          -sys           TEXT   Lets you choose which operating system version of a
                                 package to choose. Note: This is only available for
                                 Tools.
-          -c, --cpu_arch TEXT   Let's you choose which CPU architecture version of a
-                                package to choose. Note: This is only available for
+          -c, --cpu_arch TEXT   Lets you choose which CPU architecture version of a
+                                package to choose. Note: This is also only available for
                                 Tools.
-          -v, --version  TEXT   Let's you choose which version of a package to choose.
-          -p, --path     TEXT   Let's you change the path where the package will be
+          -v, --version  TEXT   Lets you choose which version of a package to choose.
+          -p, --path     TEXT   Lets you change the path where the package will be
                                 downloaded to.
-          -n, --name     TEXT   Changes the file name of the downloaded package.
+          -n, --name     TEXT   Changes the file name of the downloaded package file.
 ```
 #### - 🔍 Find:
 ```
